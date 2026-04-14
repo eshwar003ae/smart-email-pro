@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Email Pro — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+    }
+    .logo-circle {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #2979ff, #00bcd4);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .app-title {
+      font-size: 24px; font-weight: 700;
+      color: #1a1a2e; margin-bottom: 6px;
+    }
+    .app-subtitle {
+      font-size: 13.5px; color: #666; margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .feature-list {
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: #444;
+      padding: 5px 0;
+    }
+    .feature-icon { font-size: 16px; width: 22px; text-align: center; }
+
+    .btn-google {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 13px 20px;
+      font-size: 15px; font-weight: 600;
+      color: #1a1a2e;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .btn-google:hover {
+      border-color: #2979ff;
+      box-shadow: 0 4px 16px rgba(41,121,255,0.15);
+    }
+    .google-icon {
+      width: 22px; height: 22px;
+    }
+    .btn-disabled {
+      background: #f5f5f5; color: #aaa;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 13px 20px;
+      font-size: 14px; font-weight: 500;
+      cursor: not-allowed;
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+    }
+    .error-box {
+      background: #fff3f3; border: 1px solid #ffcdd2;
+      border-radius: 8px; padding: 12px 14px;
+      color: #c62828; font-size: 13px;
+      margin-bottom: 20px; text-align: left;
+    }
+    .setup-hint {
+      margin-top: 20px;
+      font-size: 12px; color: #999;
+      line-height: 1.6;
+    }
+    .setup-hint a { color: #2979ff; text-decoration: none; }
+
+    .privacy-note {
+      margin-top: 18px;
+      font-size: 11.5px; color: #aaa;
+      line-height: 1.6;
+    }
+    .divider {
+      border: none; border-top: 1px solid #eee;
+      margin: 24px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo-circle">✉</div>
+    <div class="app-title">Smart Email Pro</div>
+    <div class="app-subtitle">
+      AI-powered Gmail spam detector.<br/>
+      Automatically finds and deletes spam from your inbox.
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <span class="feature-icon">🔍</span>
+        <span>ML scan of your real Gmail inbox</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🤖</span>
+        <span>Naive Bayes NLP classifier (97%+ accuracy)</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🗑</span>
+        <span>One-click delete all detected spam</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">♻</span>
+        <span>Restore false positives anytime</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔒</span>
+        <span>OAuth2 — we never store your password</span>
+      </div>
+    </div>
+
+    {% if error %}
+    <div class="error-box">⚠ {{ error }}</div>
+    {% endif %}
+
+    {% if creds_exist %}
+    <a href="/login" class="btn-google">
+      <svg class="google-icon" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.9 2.3 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.1C12.4 13.2 17.8 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/>
+        <path fill="#FBBC05" d="M10.5 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A23.9 23.9 0 0 0 0 24c0 3.8.9 7.4 2.6 10.6l7.9-6z"/>
+        <path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.6l-7.5-5.8c-2.1 1.4-4.8 2.3-8 2.3-6.2 0-11.5-3.7-13.5-9l-7.9 6C6.5 42.5 14.6 48 24 48z"/>
+      </svg>
+      Sign in with Google
+    </a>
+    {% else %}
+    <div class="btn-disabled">⚙ Setup Required — See Instructions Below</div>
+    {% endif %}
+
+    <div class="privacy-note">
+      🔒 Your emails are never stored on our server.<br/>
+      Read-only access requested. You can revoke anytime at
+      <a href="https://myaccount.google.com/permissions" target="_blank" style="color:#2979ff">myaccount.google.com</a>
+    </div>
+
+    {% if not creds_exist %}
+    <hr class="divider"/>
+    <div class="setup-hint">
+      <strong>Setup needed:</strong><br/>
+      1. Go to <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a><br/>
+      2. Create project → Enable Gmail API<br/>
+      3. Create OAuth2 credentials → Download <code>credentials.json</code><br/>
+      4. Place <code>credentials.json</code> in the project root folder<br/>
+      5. Restart the app
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
