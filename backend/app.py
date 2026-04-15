@@ -24,6 +24,7 @@ from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 import google.auth.transport.requests
 import base64, email as email_lib
+import json
 from email.header import decode_header
 
 # ── Paths ──────────────────────────────────────────────────────────────────
@@ -60,6 +61,11 @@ pipeline    = None
 model_stats = {}
 
 def load_model():
+  # Load credentials from environment variable (for production)
+creds_env = os.environ.get("GOOGLE_CREDENTIALS")
+if creds_env:
+    with open(CRED_PATH, "w") as f:
+        f.write(creds_env)
     global pipeline, model_stats
     if os.path.exists(MODEL_PATH):
         with open(MODEL_PATH, "rb") as f:
