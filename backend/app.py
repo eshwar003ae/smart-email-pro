@@ -41,7 +41,8 @@ app.secret_key = os.urandom(24)
 CORS(app)
 
 # Allow HTTP for local dev (remove in production)
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+if os.environ.get("FLASK_ENV") != "production":
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly",
