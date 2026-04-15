@@ -37,7 +37,7 @@ CRED_PATH   = os.path.join(BASE_DIR, "..", "credentials.json")
 
 # ── Flask ──────────────────────────────────────────────────────────────────
 app = Flask(__name__, template_folder=TMPL_DIR, static_folder=STATIC_DIR)
-app.secret_key = os.urandom(24)
+app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
 CORS(app)
 
 # Allow HTTP for local dev (remove in production)
@@ -389,5 +389,5 @@ if __name__ == "__main__":
         print("  [OK] ML model loaded")
     print("  [→] Open: http://127.0.0.1:5000")
     print("="*55 + "\n")
-    port = int(os.environ.get("PORT", 5000))
+  port = int(os.environ.get("PORT", 5000))
 app.run(debug=False, host="0.0.0.0", port=port)
